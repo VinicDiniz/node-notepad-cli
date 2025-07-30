@@ -3,8 +3,12 @@ const ExistVerify = require('../src/services/existVerify');
 
 // Lê o terceiro item do array process.argv, que é o primeiro argumento
 // passado pelo usuário após "node script.js"
-const args = process.argv[2];
+const args = process.argv.slice(2);
 
+if (args.length === 0) {
+    console.error('Parâmetro não encontrado: Use node <script> <diretório/arquivo.txt>');
+    process.exit(1);
+}
 // Imprime no console o valor do argumento recebido (caminho do arquivo)
 console.log(args);
 
