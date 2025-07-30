@@ -1,5 +1,6 @@
 const readline = require('readline');               // importa módulo readline para I/O no terminal
 const fs = require('fs').promises;                  // importa a API de promises do fs para leitura/gravação
+const path = require('path');
 
 // cria uma única interface readline compartilhada
 const rl = readline.createInterface({
@@ -67,6 +68,11 @@ async function editFile(data, caminho) {
       }
 
       case 's': // save: grava o conteúdo atual no arquivo
+
+        const dir = path.dirname(caminho);
+        console.log(dir);
+        await fs.mkdir(dir, {recursive: true});
+
         await fs.writeFile(caminho, linhas.join('\n'), 'utf8');
         console.log(`Salvo em ${caminho}`);         // confirmação de salvamento
         break;
